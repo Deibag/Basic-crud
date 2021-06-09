@@ -1,8 +1,14 @@
 import React, { useState } from 'react'
 import axios from 'axios'
+import { useHistory } from 'react-router-dom';
+import {useParams} from "react-router-dom";
 
 
-export default function Update( { id } ) {
+export default function Update() {
+
+    const history = useHistory();
+
+    let { id } = useParams();
 
     const [name, setName] = useState("");
 
@@ -20,13 +26,14 @@ export default function Update( { id } ) {
         .catch(err => {
             console.log(err);
         })
-        setTimeout(() => window.location.reload(), 100);
+        history.push(`/`)
+        setTimeout(() => window.location.reload(), 0);
     }
     return (
         <div>
             <button type="button" onClick={updateBox} class="btn btn-info btn-sm mt-2">Update</button>
             <div className="form-group row">
-                <div className="col-xs-2 my-2">
+                <div className="col-xs-2 my-2 mx-5">
                     <input onChange={e => setName(e.target.value)} type="text" className="form-control-1" placeholder="Name to update"/>
                 </div>
             </div>
